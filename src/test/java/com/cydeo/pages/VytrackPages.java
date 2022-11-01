@@ -1,6 +1,6 @@
 package com.cydeo.pages;
 
-import com.cydeo.utilities.BrowserUtils;
+
 import com.cydeo.utilities.Driver;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
@@ -8,11 +8,12 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.net.MalformedURLException;
 import java.util.*;
 
 public class VytrackPages {
 
-    public VytrackPages() {
+    public VytrackPages() throws MalformedURLException {
         PageFactory.initElements(Driver.getDriver(), this);
     }
     @FindBy(xpath = "//input[@id='prependedInput']")
@@ -54,11 +55,11 @@ public class VytrackPages {
     @FindBy(xpath = "//a[@href='/user/logout']")
     public WebElement logoutButton;
 
-    public void managerModuleListCheck() {
+    public void managerModuleListCheck() throws MalformedURLException {
         List<String> expectedRes = new ArrayList<>(Arrays.asList("Dashboards", "Fleet", "Customers", "Sales",
                 "Activities", "Marketing", "Reports & Segments", "System"));
         List<String> managerModules = new ArrayList<>();
-        Driver.waitUntilVisible(dashBoardsModule, 40);
+        Driver.waitUntilVisible(dashBoardsModule, 10);
         managerModules.add(dashBoardsModule.getText());
         managerModules.add(fleetModule.getText());
         managerModules.add(customersModule.getText());
@@ -74,10 +75,10 @@ public class VytrackPages {
         }
     }
 
-    public void driverModuleListCheck() {
+    public void driverModuleListCheck() throws MalformedURLException {
         List<String> expectedRes = new ArrayList<>(Arrays.asList("Fleet", "Customers", "Activities", "System"));
         List<String> driverModules = new ArrayList<>();
-        Driver.waitUntilVisible(fleetModule, 40);
+        Driver.waitUntilVisible(fleetModule, 10);
         driverModules.add(fleetModule.getText());
         driverModules.add(customersModule.getText());
         driverModules.add(activitiesModule.getText());
@@ -89,7 +90,7 @@ public class VytrackPages {
         }
     }
 
-    public void logout() {
+    public void logout() throws MalformedURLException {
         Actions actions = new Actions(Driver.getDriver());
         actions.moveToElement(userButton);
         actions.click();
